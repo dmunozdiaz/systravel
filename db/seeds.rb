@@ -6,3 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+if Role.all.count == 0
+	['admin', 'alumno', 'apoderado'].each do |role|
+	  Role.find_or_create_by({name: role})
+	end
+end
+
+if Assignment.all.count == 0
+	assignment = Assignment.new
+	assignment.user = User.find(1);
+	assignment.role = Role.find_by_name('admin')
+	assignment.save
+end
